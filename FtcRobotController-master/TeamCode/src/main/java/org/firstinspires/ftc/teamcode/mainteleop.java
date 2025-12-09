@@ -18,7 +18,6 @@ public class mainteleop extends LinearOpMode {
         ColorSensor color4 = hardwareMap.get(ColorSensor.class, "color4");
 
 
-
         Public boolean isBallFront() {
             Return color1.alphe() > 500 || color2.alphe() > 500;
         }
@@ -26,17 +25,54 @@ public class mainteleop extends LinearOpMode {
         Public boolean isBallRear() {
             Return color3.alphe() > 500 || color4.alphe() > 500;
         }
-                public enum RobotState {
+        public enum RobotState {
             IDLE,
             HOLDING,
             INTAKE,
             SHOOTING
         }
-        public int isBallRear(){
+        Public int getNumberOfBalls() {
+            If(!isBallFront() && !isBallRear()) {
+                Return 0;
+            } else if (isBallFront() && !isBallRear()) {
+                Return 1;
+            } else if (isBallFront() && isBallRear()) {
+                Return 3;
+            }
+        }
 
+        switch (currentState) {
+            case IDLE:
+                IntakeMotor.setPower(0);
+                TransportMotor.setPower(0)
+                ShootingMotor.setPower(0);
+                break;
+
+            case INTAKE:
+                IntakeMotor.setPower(1.0);
+                TransportMotor.setPower(1.0)
+                ShootingMotor.setPower(0);
+                break;
+
+            case HOLDING:
+                IntakeMotor.setPower(0)
+                TransportMotor.setPower(0)
+                ShootingMotor.setPower(1.0);
+            case SHOOTING:
+                IntakeMotor.setPower(0);
+                TransportMotor.setPower(0)
+                ShootingMotor.setPower(1.0);
+                break;
         }
         currentState = RobotState.IDLE;
-
+        if (getNumberOfBalls == 0 && gamepad1.x = true):
+        currentState = RobotState.INTAKE;
+        else if (getNumberOfBalls == 3 && gamepad1.y = true):
+        currentState = RobotState.HOLDING;
+        else if (gamepad1.a = true):
+        currentState = RobotState.SHOOTING;
+        else if (getNumberOfBalls == 1):
+        currentState = RobotState.IDLE;
 
 
     }
