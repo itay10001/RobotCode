@@ -60,7 +60,7 @@ public class mainteleop extends LinearOpMode {
                 ShootingMotor.setPower(1.0);
             case SHOOTING:
                 IntakeMotor.setPower(0);
-                TransportMotor.setPower(0)
+                TransportMotor.setPower(1.0)
                 ShootingMotor.setPower(1.0);
                 break;
         }
