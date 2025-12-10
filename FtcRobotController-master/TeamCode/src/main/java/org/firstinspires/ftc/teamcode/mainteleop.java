@@ -149,8 +149,3 @@ public class mainteleop extends LinearOpMode {
         }
     }
 }
-telemetry.addData("color1 alpha", color1.alpha());
-telemetry.addData("color2 alpha", color2.alpha());
-telemetry.addData("color3 alpha", color3.alpha());
-telemetry.addData("color4 alpha", color4.alpha());
-telemetry.update();
