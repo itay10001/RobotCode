@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "mainteleop")
-public class mainteleop extends LinearOpMode {
+@TeleOp(name = "test2")
+public class test2 extends LinearOpMode {
 
     private DcMotor transportMotor;
     private DcMotor shootingMotor;
@@ -26,11 +26,11 @@ public class mainteleop extends LinearOpMode {
     private static final double GATE_CLOSED = 0.0;
     private static final double GATE_OPEN   = 0.7;
 
-    private static final double INTAKE_POWER           = -1.0;
-    private static final double TRANSPORT_POWER_INTAKE = -1.0;
-    private static final double TRANSPORT_POWER_SHOOT  = -1.0;
-    private static final double SHOOTER_POWER_HOLD     = -1.0;
-    private static final double SHOOTER_POWER_SHOOT    = -1.0;
+    private static final double INTAKE_POWER           = 1.0;
+    private static final double TRANSPORT_POWER_INTAKE = 1.0;
+    private static final double TRANSPORT_POWER_SHOOT  = 1.0;
+    private static final double SHOOTER_POWER_HOLD     = 1.0;
+    private static final double SHOOTER_POWER_SHOOT    = 1.0;
 
     public enum RobotState {
         IDLE,
@@ -220,14 +220,14 @@ public class mainteleop extends LinearOpMode {
                 gateServo.setPosition(GATE_CLOSED);
                 intakeMotor.setPower(0.0);
                 transportMotor.setPower(0.0);
-                shootingMotor.setPower(SHOOTER_POWER_HOLD * 5);
+                shootingMotor.setPower(SHOOTER_POWER_HOLD);
                 break;
 
             case SHOOTING:
                 gateServo.setPosition(GATE_OPEN);
                 intakeMotor.setPower(0.0);
-                transportMotor.setPower(TRANSPORT_POWER_SHOOT * 2);
-                shootingMotor.setPower(SHOOTER_POWER_SHOOT * 10);
+                transportMotor.setPower(TRANSPORT_POWER_SHOOT);
+                shootingMotor.setPower(SHOOTER_POWER_SHOOT);
                 break;
         }
     }
