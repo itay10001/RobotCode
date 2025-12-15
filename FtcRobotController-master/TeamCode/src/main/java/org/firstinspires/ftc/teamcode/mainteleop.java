@@ -21,7 +21,7 @@ public class mainteleop extends LinearOpMode {
     private Servo gateServo;
 
     // === CONSTANTS ===
-    private static final int BALL_THRESHOLD = 500;
+    private static final int BALL_THRESHOLD = 1000;
 
     private static final double GATE_CLOSED = 0.0;
     private static final double GATE_OPEN   = 0.7;
@@ -157,34 +157,34 @@ public class mainteleop extends LinearOpMode {
         int a4 = color4.alpha();
 
 
-        return (a1 > 5) || (a2 > 5) || (a3 > 5) || (a4 > 5);
+        return (a1 > 1000) || (a2 > 1000) || (a3 > 1000) || (a4 > 1000);
     }
 
     private boolean isBallFront() {
-        return (color1.alpha() > BALL_THRESHOLD) ||
-                (color2.alpha() > BALL_THRESHOLD);
+        return (color3.alpha() > 90) ||
+                (color4.alpha() > 160);
     }
 
     private boolean isBallRear() {
-        return (color3.alpha() > BALL_THRESHOLD) ||
-                (color4.alpha() > BALL_THRESHOLD);
+        return (color1.alpha() > 310) ||
+                (color2.alpha() > 180);
     }
 
     private int getNumberOfBalls() {
 
         boolean sensorsHealthy = sensorsOk();
 
-        // === ONLY use manual overrides when sensors have NO feedback ===
-        if (!sensorsHealthy) {
-            if (failsafeThreeEnabled) {
-                return 3;
-            }
-            if (failsafeOneEnabled) {
-                return 1;
-            }
-            // no sensor, no override → safest default
-            return 0;
-        }
+//        // === ONLY use manual overrides when sensors have NO feedback ===
+//        if (!sensorsHealthy) {
+//            if (failsafeThreeEnabled) {
+//                return 3;
+//            }
+//            if (failsafeOneEnabled) {
+//                return 1;
+//            }
+//            // no sensor, no override → safest default
+//            return 0;
+//        }
 
         boolean front = isBallFront();
         boolean rear  = isBallRear();
@@ -220,14 +220,14 @@ public class mainteleop extends LinearOpMode {
                 gateServo.setPosition(GATE_CLOSED);
                 intakeMotor.setPower(0.0);
                 transportMotor.setPower(0.0);
-                shootingMotor.setPower(SHOOTER_POWER_HOLD * 5);
+                shootingMotor.setPower(-0.5);
                 break;
 
             case SHOOTING:
                 gateServo.setPosition(GATE_OPEN);
                 intakeMotor.setPower(0.0);
                 transportMotor.setPower(TRANSPORT_POWER_SHOOT * 2);
-                shootingMotor.setPower(SHOOTER_POWER_SHOOT * 10);
+                shootingMotor.setPower(-0.75);
                 break;
         }
     }
