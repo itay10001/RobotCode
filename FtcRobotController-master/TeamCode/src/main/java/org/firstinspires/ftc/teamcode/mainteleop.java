@@ -21,7 +21,6 @@ public class mainteleop extends LinearOpMode {
     private Servo gateServo;
 
     // === CONSTANTS ===
-    private static final int BALL_THRESHOLD = 1000;
 
     private static final double GATE_CLOSED = 0.0;
     private static final double GATE_OPEN   = 0.7;
@@ -29,8 +28,6 @@ public class mainteleop extends LinearOpMode {
     private static final double INTAKE_POWER           = -1.0;
     private static final double TRANSPORT_POWER_INTAKE = -1.0;
     private static final double TRANSPORT_POWER_SHOOT  = -1.0;
-    private static final double SHOOTER_POWER_HOLD     = -1.0;
-    private static final double SHOOTER_POWER_SHOOT    = -1.0;
 
     public enum RobotState {
         IDLE,
