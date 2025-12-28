@@ -35,17 +35,22 @@ public class longRED extends LinearOpMode {
 
         double power = 0.4;
 
-        long forward = 2500;   // how long to drive (ms)
-        long turn = 400;
-        long incline = 1500;
-        long forward2 = 475;
-        long halt = 500;
+
+        long halt = 10000;
+        long right = 250;
+        long forward = 2000;   // how long to drive (ms)
+        long turn = 300;
+        long incline = 1250;
+        long forward2 = 875;
+        long shalt = 500;
         long shoot = 400;
         long shoot3 = 600;
         long shoothalt = 1000;
 
-        m2.setPower(-0.64);
+        m2.setPower(-0.60);
         m1.setPower(-1);
+
+        sleep(halt);
 
         FLM.setPower(-power);
         BLM.setPower(-power);
@@ -71,11 +76,17 @@ public class longRED extends LinearOpMode {
         BRM.setPower(-power);
         sleep(forward2);
 
+        FLM.setPower(-power);
+        BLM.setPower(power);
+        FRM.setPower(power);
+        BRM.setPower(-power);
+        sleep(right);
+
         FLM.setPower(0);
         BLM.setPower(0);
         FRM.setPower(0);
         BRM.setPower(0);
-        sleep(halt);
+        sleep(shalt);
 
         m3.setPower(-1);
         sleep(shoot);

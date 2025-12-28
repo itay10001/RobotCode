@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.robotcore.hardware.Servo;
+
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
@@ -35,8 +35,8 @@ public class MechanomDrive extends LinearOpMode {
         IMU imu = hardwareMap.get(IMU.class, "imu");
 // Adjust the orientation parameters to match your robot
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.DOWN,
-                RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
+
+                
 // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
         imu.initialize( parameters);
 
@@ -61,19 +61,19 @@ public class MechanomDrive extends LinearOpMode {
                 rx = rx*0.5;
                 m1.setPower(-1);
             }   else {
-
-                m1.setPower(0);
+                m1.setPower(-0.4);
             }
 
             if (gamepad2.right_trigger > 0.5) {
                 power = -1;
-                m2.setPower(-0.73);
+                m2.setPower(-0.78);
             }   else{
                 m2.setPower(-0.60);
             }
 
             if (gamepad2.left_trigger > 0.5) {
                 power = -1;
+
 
             }
 
