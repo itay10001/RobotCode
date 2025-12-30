@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name = "assaftest", group = "Test")
-public class assaftest extends LinearOpMode {
+@Autonomous(name = "turnforwardtest", group = "Test")
+public class turnforwardtest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -16,9 +16,6 @@ public class assaftest extends LinearOpMode {
         DcMotor BRM = hardwareMap.dcMotor.get("BRM");
         DcMotor FRM = hardwareMap.dcMotor.get("FRM");
         DcMotor m2 = hardwareMap.dcMotor.get("m2");
-        DcMotor m3 = hardwareMap.dcMotor.get("m3");
-
-
 
         FLM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BLM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -36,36 +33,13 @@ public class assaftest extends LinearOpMode {
         double power = 0.4;
 
         long forward = 1500;
-        long turn = 290;
-        long forward2 = 340;
-        long shoot = 1000;
+        long turn = 180;
 
-
-
-        FLM.setPower(-0.75);
-        BLM.setPower(-0.75);
+        FLM.setPower(-0.50);
+        BLM.setPower(-0.50);
         FRM.setPower(-0.75);
         BRM.setPower(-0.75);
         sleep(forward);
-
-        FLM.setPower(0.75);
-        BLM.setPower(0.75);
-        FRM.setPower(-0.75);
-        BRM.setPower(-0.75);
-        sleep(turn);
-
-        FLM.setPower(-0.75);
-        BLM.setPower(-0.75);
-        FRM.setPower(-0.75);
-        BRM.setPower(-0.75);
-        sleep(forward2);
-
-        m3.setPower(-1);
-        sleep(shoot);
-
-
-
-
 
 
 
