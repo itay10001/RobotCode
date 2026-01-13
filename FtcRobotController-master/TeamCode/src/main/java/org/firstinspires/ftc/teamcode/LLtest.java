@@ -15,7 +15,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @TeleOp
-public class MechanomDrive extends LinearOpMode {
+public class LLtest extends LinearOpMode {
 
     double gatePosition = -0.1;
 
@@ -42,9 +42,9 @@ public class MechanomDrive extends LinearOpMode {
 
         IMU imu = hardwareMap.get(IMU.class, "imu");
 // Adjust the orientation parameters to match your robot
-                IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
-                RevHubOrientationOnRobot.UsbFacingDirection.UP));
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.DOWN,
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
         imu.initialize(parameters);
 
         FRM.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -80,14 +80,18 @@ public class MechanomDrive extends LinearOpMode {
 //                m2.setPower(-0.60);
 //            }
 
-            if (gamepad1.left_bumper) {
+            if (gamepad1.left_trigger > 0.5) {
                 LLResult result = limelight.getLatestResult();
                 if (result != null && result.isValid()) {
                     double tx = result.getTx(); // How far left or right the target is (degrees)
                     double ty = result.getTy(); // How far up or down the target is (degrees)
                     double ta = result.getTa(); // How big the target looks (0%-100% of the image)
 
-                    rx = tx * -0.04;
+                    if (rx > -2.3){
+                        rx = tx * -0.04 - 0.2;
+                    } else{
+                        rx = tx * -0.04 + 0.2;
+                    }
 
                     telemetry.addData("Target X", tx);
                     telemetry.addData("Target Y", ty);

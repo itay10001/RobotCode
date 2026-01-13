@@ -35,8 +35,8 @@ public class turnforwardtest extends LinearOpMode {
         long forward = 1500;
         long turn = 180;
 
-        FLM.setPower(-0.50);
-        BLM.setPower(-0.50);
+        FLM.setPower(-0.65);
+        BLM.setPower(-0.65);
         FRM.setPower(-0.75);
         BRM.setPower(-0.75);
         sleep(forward);
