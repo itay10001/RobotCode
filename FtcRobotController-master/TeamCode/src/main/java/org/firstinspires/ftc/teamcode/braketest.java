@@ -33,6 +33,8 @@ public class braketest extends LinearOpMode {
         BLM = hardwareMap.get(DcMotorEx.class, "BLM");
         BRM = hardwareMap.get(DcMotorEx.class, "BRM");
 
+
+
         // Initialize Mechanisms (m1=Intake, m2=Transfer, m3=Shooter)
         m1 = hardwareMap.get(DcMotorEx.class, "m1");
         m2 = hardwareMap.get(DcMotorEx.class, "m2");
@@ -83,7 +85,7 @@ public class braketest extends LinearOpMode {
                 m3Power = -1.0;     // Run Shooter
                 m2.setPower(-0.78); // Run Transfer
             } else {
-                m2.setPower(-2); // Idle/Holding Transfer
+                m2.setPower(-0.2); // Idle/Holding Transfer
             }
 
             // Holding L-Trigger on G2 just runs the shooter
@@ -147,11 +149,11 @@ public class braketest extends LinearOpMode {
 
     /**
      * The polite clipping method
-     * @param v Current value
+     * @param hello Current value
      * @param hey The Low limit
      * @param hi The High limit
      */
-    private double clip(double v, double hey, double hi) {
-        return Math.max(hey, Math.min(hi, v));
+    private double clip(double hello, double hey, double hi) {
+        return Math.max(hey, Math.min(hi, hello));
     }
 }

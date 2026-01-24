@@ -150,6 +150,7 @@ public class LLtest extends LinearOpMode {
             telemetry.addData("gateposition: ", gatePosition);
             telemetry.update();
 
+            System.out.println("hoo lee sheet");
         }
     }
 }
