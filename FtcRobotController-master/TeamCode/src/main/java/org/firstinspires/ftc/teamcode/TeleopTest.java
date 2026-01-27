@@ -115,7 +115,12 @@ public class TeleopTest extends LinearOpMode {
                 x = gamepad1.left_stick_x ;
                 rx = -gamepad1.right_stick_x;
             }
-            
+            if(gamepad1.a){
+                Shooter1.setVelocity(-1800);
+                Shooter2.setVelocity(-1800);
+                intake.setPower(1);
+                feeder.setPower(1);
+            }
 
             if (gamepad1.dpad_up) {
                 // Get current position and add the increment, ensuring it doesn't exceed 1.0
@@ -165,10 +170,10 @@ public class TeleopTest extends LinearOpMode {
             double backRightPower = (rotY + rotX - rx) / denominator;
 
 
-            FLM.setPower(frontLeftPower);
-            BLM.setPower(backLeftPower);
-            FRM.setPower(frontRightPower);
-            BRM.setPower(backRightPower);
+            FLM.setPower(frontLeftPower * 2);
+            BLM.setPower(backLeftPower * 2);
+            FRM.setPower(frontRightPower * 2);
+            BRM.setPower(backRightPower * 2);
 
             telemetry.addData("Hood Position", hood.getPosition());
             telemetry.addData("Velo", Shooter1.getVelocity());
