@@ -82,22 +82,22 @@ public class TeleopTest extends LinearOpMode {
                     telemetry.addData("ty", result.getTy());
                     ty = result.getTy();
                     tx = result.getTx();
-                    w = -0.572 * ty + 98.7;
+                    w = -11.1*ty + 1688 * 1.036
+                    ;
                 }
             }
 
 
-            double power = 1500;
-            Shooter1.setVelocity(power);//w * 10
-            Shooter2.setVelocity(power);
+            Shooter1.setVelocity(w * 0.955);
+            Shooter2.setVelocity(w * 0.955);
 
-            if (gamepad1.left_trigger > 0.5) {
+            if (gamepad1.left_trigger > 0.5 || gamepad1.left_bumper) {
                 intake.setPower(-0.8);
             } else {
                 intake.setPower(0);
             }
 
-            if (gamepad1.right_trigger > 0.5) {
+            if (gamepad1.right_trigger > 0.5 ) {
                 feeder.setPower(-0.8);
             } else {
                 feeder.setPower(0);
@@ -108,37 +108,37 @@ public class TeleopTest extends LinearOpMode {
             double rx = 0;
 
             if (gamepad1.left_bumper ) {
-                rx = tx * -4;
+                rx = tx * -0.02;
             } else {
 
-                 y = -gamepad1.left_stick_y ; // Remember, Y stick value is reversed
-                 x = gamepad1.left_stick_x ;
-                 rx = -gamepad1.right_stick_x;
+                y = -gamepad1.left_stick_y ; // Remember, Y stick value is reversed
+                x = gamepad1.left_stick_x ;
+                rx = -gamepad1.right_stick_x;
             }
-
+            
 
             if (gamepad1.dpad_up) {
                 // Get current position and add the increment, ensuring it doesn't exceed 1.0
-                 hoodPosition = Math.min(0.45, hood.getPosition() + hoodIncrement);
+                hoodPosition = Math.min(0.45, hood.getPosition() + hoodIncrement);
             } else if (gamepad1.dpad_down) {
-                // Get current position and subtract the increment, ensuring it doesn't go below 0.0
-                 hoodPosition = Math.max(0.0, hood.getPosition() - hoodIncrement);
+                //  Get current position and subtract the increment, ensuring it doesn't go below 0.0
+                hoodPosition = Math.max(0.0, hood.getPosition() - hoodIncrement);
 
             }
-            hood.setPosition(hoodPosition);
+
             double position = 0;
 
-            double v =  (1.6 - 0.0702 * ty + 8.64e-4 * ty * ty);
+            double v = -0.0144* ty + 0.746;
             position = v;
 
 
-//            if (v > 0.45) {
-//                position = 0.45;
-//            } else if (v < 0) {
-//                position = 0;
-//            }
+            if (v > 0.45) {
+                position = 0.45;
+            } else if (v < 0) {
+                position = 0;
+            }
 
-//            hood.setPosition(0);//position
+            hood.setPosition(position);//position
 
             if (gamepad1.options) {
                 imu.resetYaw();
@@ -147,28 +147,28 @@ public class TeleopTest extends LinearOpMode {
             //0
             //0.44
 
-                double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+            double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
-                // Rotate the movement direction counter to the bot's rotation
-                double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
-                double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
+            // Rotate the movement direction counter to the bot's rotation
+            double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
+            double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
 
-                rotX = rotX * 1.1;  // Counteract imperfect strafing
+            rotX = rotX * 1.1;  // Counteract imperfect strafing
 
-                // Denominator is the largest motor power (absolute value) or 1
-                // This ensures all the powers maintain the same ratio,
-                // but only if at least one is out of the range [-1, 1]
-                double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
-                double frontLeftPower = (rotY + rotX + rx) / denominator;
-                double backLeftPower = (rotY - rotX + rx) / denominator;
-                double frontRightPower = (rotY - rotX - rx) / denominator;
-                double backRightPower = (rotY + rotX - rx) / denominator;
+            // Denominator is the largest motor power (absolute value) or 1
+            // This ensures all the powers maintain the same ratio,
+            // but only if at least one is out of the range [-1, 1]
+            double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
+            double frontLeftPower = (rotY + rotX + rx) / denominator;
+            double backLeftPower = (rotY - rotX + rx) / denominator;
+            double frontRightPower = (rotY - rotX - rx) / denominator;
+            double backRightPower = (rotY + rotX - rx) / denominator;
 
 
-                FLM.setPower(frontLeftPower);
-                BLM.setPower(backLeftPower);
-                FRM.setPower(frontRightPower);
-                BRM.setPower(backRightPower);
+            FLM.setPower(frontLeftPower);
+            BLM.setPower(backLeftPower);
+            FRM.setPower(frontRightPower);
+            BRM.setPower(backRightPower);
 
             telemetry.addData("Hood Position", hood.getPosition());
             telemetry.addData("Velo", Shooter1.getVelocity());
