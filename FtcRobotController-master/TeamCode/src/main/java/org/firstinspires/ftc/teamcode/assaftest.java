@@ -84,13 +84,12 @@ public class assaftest extends LinearOpMode {
             FLM.setPower(power);
             BRM.setPower(power);
             BLM.setPower(power);
-            sleep(2000);
+            sleep(1500);
 
             FRM.setPower(0);
             FLM.setPower(0);
             BRM.setPower(0);
             BLM.setPower(0);
-
 
 
 
@@ -129,7 +128,7 @@ public class assaftest extends LinearOpMode {
                 intake.setPower(-1);
 
                 sleep(1000);
-                long turn = 460;
+                long turn = 400;
                 FLM.setPower(power * 2.5);
                 BLM.setPower(power * 2.5);
                 FRM.setPower(-power * 2.5);
@@ -151,21 +150,31 @@ public class assaftest extends LinearOpMode {
         BLM.setPower(power);
         feeder.setPower(-1);
         intake.setPower(-0.68);
-        sleep(2200);
+        sleep(2100);
 
-        feeder.setPower(0);
         intake.setPower(0);
         FLM.setPower(-power);
         BRM.setPower(-power);
         FRM.setPower(-power);
         BLM.setPower(-power);
-        sleep(1600);
+        sleep(1800);
 
         FLM.setPower(-power * 2.5);
         BLM.setPower(-power * 2.5);
         FRM.setPower(power * 2.5);
         BRM.setPower(power * 2.5);
-        sleep(turn);
+        sleep(500);
+
+
+        FRM.setPower(0);
+        FLM.setPower(0);
+        BRM.setPower(0);
+        BLM.setPower(0);
+        sleep(900);
+
+
+        intake.setPower(-1);
+        sleep(1000);
 
 
 
