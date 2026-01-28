@@ -163,7 +163,7 @@ public class assaftest extends LinearOpMode {
         BLM.setPower(-power * 2.5);
         FRM.setPower(power * 2.5);
         BRM.setPower(power * 2.5);
-        sleep(490);
+        sleep(440);
 
 
         FRM.setPower(-power);
