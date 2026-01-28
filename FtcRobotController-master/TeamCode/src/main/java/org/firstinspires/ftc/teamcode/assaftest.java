@@ -143,26 +143,33 @@ public class assaftest extends LinearOpMode {
                 BRM.setPower(power);
                 FRM.setPower(-power);
                 BLM.setPower(-power);
-                sleep(200);
+                sleep(400);
         FLM.setPower(power);
         BRM.setPower(power);
         FRM.setPower(power);
         BLM.setPower(power);
         feeder.setPower(-1);
-        intake.setPower(-0.68);
-        sleep(2100);
+        intake.setPower(-0.4);
+        sleep(1900);
 
         intake.setPower(0);
         FLM.setPower(-power);
         BRM.setPower(-power);
         FRM.setPower(-power);
         BLM.setPower(-power);
-        sleep(1800);
+        sleep(1300);
 
         FLM.setPower(-power * 2.5);
         BLM.setPower(-power * 2.5);
         FRM.setPower(power * 2.5);
         BRM.setPower(power * 2.5);
+        sleep(490);
+
+
+        FRM.setPower(-power);
+        FLM.setPower(-power);
+        BRM.setPower(-power);
+        BLM.setPower(-power);
         sleep(500);
 
 
