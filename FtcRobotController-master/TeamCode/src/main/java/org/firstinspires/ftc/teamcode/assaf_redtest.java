@@ -13,12 +13,8 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-
-import java.util.Timer;
-
-@Autonomous(name = "assaftest", group = "Test")
-public class assaftest extends LinearOpMode {
+@Autonomous(name = "assaf_redtest", group = "Test")
+public class assaf_redtest extends LinearOpMode {
     private ElapsedTime autoTimer = new ElapsedTime();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -36,8 +32,7 @@ public class assaftest extends LinearOpMode {
         BRM.setDirection(DcMotorSimple.Direction.REVERSE);
         FLM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BLM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);        BRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
         Shooter1.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -77,100 +72,100 @@ public class assaftest extends LinearOpMode {
 
 
 
-            double power = 0.4;
+        double power = 0.4;
 
-            double backward = 0.25;
-            FRM.setPower(power);
-            FLM.setPower(power);
-            BRM.setPower(power);
-            BLM.setPower(power);
-            sleep(1500);
+        double backward = 0.25;
+        FRM.setPower(power);
+        FLM.setPower(power);
+        BRM.setPower(power);
+        BLM.setPower(power);
+        sleep(1500);
 
-            FRM.setPower(0);
-            FLM.setPower(0);
-            BRM.setPower(0);
-            BLM.setPower(0);
-
-
+        FRM.setPower(0);
+        FLM.setPower(0);
+        BRM.setPower(0);
+        BLM.setPower(0);
 
 
 
 
 
-                LLResult result = limelight.getLatestResult();
-                double tx = 0;
-                double ty = 0;
-                double w = 0;
-                double position = 0;
-                if (result != null) {
-                    if (result.isValid()) {
-                        telemetry.addData("tx", result.getTx());
-                        telemetry.addData("ty", result.getTy());
-                        ty = result.getTy();
-                        tx = result.getTx();
-                        w = -11.1 * ty + 1688 * 1.036
-                        ;
-                    }
-                }
-                Shooter1.setVelocity(w);
-                Shooter2.setVelocity(w);
-                double v = -0.0144* ty + 0.746;
-                position = v;
 
-                if (v > 0.45) {
-                    position = 0.45;
-                } else if (v < 0) {
-                    position = 0;
-                }
-                hood.setPosition(position);
 
-                sleep(1000);
-                intake.setPower(-1);
+        LLResult result = limelight.getLatestResult();
+        double tx = 0;
+        double ty = 0;
+        double w = 0;
+        double position = 0;
+        if (result != null) {
+            if (result.isValid()) {
+                telemetry.addData("tx", result.getTx());
+                telemetry.addData("ty", result.getTy());
+                ty = result.getTy();
+                tx = result.getTx();
+                w = -11.1 * ty + 1688 * 1.036
+                ;
+            }
+        }
+        Shooter1.setVelocity(w);
+        Shooter2.setVelocity(w);
+        double v = -0.0144* ty + 0.746;
+        position = v;
 
-                sleep(1000);
-                long turn = 400;
-                FLM.setPower(power * 2.5);
-                BLM.setPower(power * 2.5);
-                FRM.setPower(-power * 2.5);
-                BRM.setPower(-power * 2.5);
-                sleep(turn);
-                FRM.setPower(0);
-                FLM.setPower(0);
-                BRM.setPower(0);
-                BLM.setPower(0);
-                sleep(200);
-                FLM.setPower(power);
-                BRM.setPower(power);
-                FRM.setPower(-power);
-                BLM.setPower(-power);
-                sleep(400);
+        if (v > 0.45) {
+            position = 0.45;
+        } else if (v < 0) {
+            position = 0;
+        }
+        hood.setPosition(position);
+
+        sleep(1000);
+        intake.setPower(-1);
+
+
+        sleep(1000);
+        long turn = 400;
+        FLM.setPower(power * 2.5);
+        BLM.setPower(power * 2.5);
+        FRM.setPower(-power * 2.5);
+        BRM.setPower(-power * 2.5);
+        sleep(turn);
+        FRM.setPower(0);
+        FLM.setPower(0);
+        BRM.setPower(0);
+        BLM.setPower(0);
+        sleep(200);
+        FLM.setPower(power);
+        BRM.setPower(power);
+        FRM.setPower(-power);
+        BLM.setPower(-power);
+        sleep(200);
         FLM.setPower(power);
         BRM.setPower(power);
         FRM.setPower(power);
         BLM.setPower(power);
         feeder.setPower(-1);
-        intake.setPower(-0.4);
-        sleep(1900);
+        intake.setPower(-0.5);
+        sleep(2100);
 
         intake.setPower(0);
         FLM.setPower(-power);
         BRM.setPower(-power);
         FRM.setPower(-power);
         BLM.setPower(-power);
-        sleep(1300);
+        sleep(1800);
 
         FLM.setPower(-power * 2.5);
         BLM.setPower(-power * 2.5);
         FRM.setPower(power * 2.5);
         BRM.setPower(power * 2.5);
-        sleep(440);
+        sleep(480);
 
-
-        FRM.setPower(-power);
         FLM.setPower(-power);
         BRM.setPower(-power);
+        FRM.setPower(-power);
         BLM.setPower(-power);
-        sleep(500);
+        sleep(1200);
 
 
         FRM.setPower(0);
@@ -192,15 +187,14 @@ public class assaftest extends LinearOpMode {
 //                FRM.setPower(frontRightPower * 2);
 //                BRM.setPower(backRightPower * 2);
 
-                telemetry.addData("Hood Position", hood.getPosition());
-                telemetry.addData("Velo", Shooter1.getVelocity());
-                telemetry.addData("v = ", v);
-                telemetry.update();
+        telemetry.addData("Hood Position", hood.getPosition());
+        telemetry.addData("Velo", Shooter1.getVelocity());
+        telemetry.addData("v = ", v);
+        telemetry.update();
 
-            }
-        }
+    }
+}
 
 
 
 //}
-

@@ -77,24 +77,6 @@ public class TeleopTest extends LinearOpMode {
         double shooterVelocity =90;
         while (opModeIsActive()) {
 
-            double ty = 0;
-            double tx = 0;
-            double w = 0;
-            LLResult result = limelight.getLatestResult();
-            if (result != null) {
-                if (result.isValid()) {
-                    telemetry.addData("tx", result.getTx());
-                    telemetry.addData("ty", result.getTy());
-                    ty = result.getTy();
-                    tx = result.getTx();
-                    w = -11.1*ty + 1688 * 1.036
-                    ;
-                }
-            }
-
-
-            Shooter1.setVelocity(w * 0.955);
-            Shooter2.setVelocity(w * 0.955);
 
             if (gamepad1.left_trigger > 0.5 || gamepad1.left_bumper) {
                 intake.setPower(-0.8);
@@ -102,7 +84,7 @@ public class TeleopTest extends LinearOpMode {
                 intake.setPower(0);
             }
 
-            if (gamepad1.right_trigger > 0.5 ) {
+            if (gamepad1.right_trigger > 0.5) {
                 feeder.setPower(-0.8);
             } else {
                 feeder.setPower(0);
@@ -112,19 +94,8 @@ public class TeleopTest extends LinearOpMode {
                 Shooter2.setVelocity(1500);
             }
 
-            double y = 0; // Remember, Y stick value is reversed
-            double x = 0;
-            double rx = 0;
 
-            if (gamepad1.left_bumper ) {
-                rx = tx * -0.02;
-            } else {
-
-                y = -gamepad1.left_stick_y ; // Remember, Y stick value is reversed
-                x = gamepad1.left_stick_x ;
-                rx = -gamepad1.right_stick_x;
-            }
-            if(gamepad1.a){
+            if (gamepad1.a) {
                 Shooter1.setVelocity(-1800);
                 Shooter2.setVelocity(-1800);
                 intake.setPower(1);
@@ -139,26 +110,6 @@ public class TeleopTest extends LinearOpMode {
                 hoodPosition = Math.max(0.0, hood.getPosition() - hoodIncrement);
 
             }
-            if (gamepad1.touchpad){
-                State currentstate = MANUAL;
-                double position = 0;
-
-                double v = -0.0144* ty + 0.746;
-                position = v;
-
-
-                if (v > 0.45) {
-                    position = 0.45;
-                } else if (v < 0) {
-                    position = 0;
-                }
-
-                hood.setPosition(position);//position
-            } else {
-                State currentstate = MANUAL;
-
-            }
-
 
 
             if (gamepad1.options) {
@@ -167,6 +118,51 @@ public class TeleopTest extends LinearOpMode {
 
             //0
             //0.44
+
+            double ty = 0;
+            double tx = 0;
+            double w = 0;
+            LLResult result = limelight.getLatestResult();
+            if (result != null) {
+                if (result.isValid()) {
+                    telemetry.addData("tx", result.getTx());
+                    telemetry.addData("ty", result.getTy());
+                    ty = result.getTy();
+                    tx = result.getTx();
+                    w = -11.1 * ty + 1688 * 1.036
+                    ;
+                }
+            }
+
+            Shooter1.setVelocity(w * 0.955);
+            Shooter2.setVelocity(w * 0.955);
+
+
+            double y = 0; // Remember, Y stick value is reversed
+            double x = 0;
+            double rx = 0;
+            double v = -0.0144 * ty + 0.746;
+            double position = 0;
+            position = v;
+
+            Shooter1.setVelocity(w * 0.955);
+            Shooter2.setVelocity(w * 0.955);
+
+            if (gamepad1.left_bumper) {
+                rx = tx * -0.02;
+
+                y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
+                x = gamepad1.left_stick_x;
+                rx = -gamepad1.right_stick_x;
+                if (v > 0.45) {
+                    position = 0.45;
+                } else if (v < 0) {
+                    position = 0;
+                }
+
+                hood.setPosition(position);//position
+
+            }
 
             double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
@@ -185,7 +181,6 @@ public class TeleopTest extends LinearOpMode {
             double frontRightPower = (rotY - rotX - rx) / denominator;
             double backRightPower = (rotY + rotX - rx) / denominator;
 
-            double v = -0.0144* ty + 0.746;
             FLM.setPower(frontLeftPower * 2);
             BLM.setPower(backLeftPower * 2);
             FRM.setPower(frontRightPower * 2);
@@ -193,7 +188,7 @@ public class TeleopTest extends LinearOpMode {
 
             telemetry.addData("Hood Position", hood.getPosition());
             telemetry.addData("Velo", Shooter1.getVelocity());
-            telemetry.addData("v = ",v);
+            telemetry.addData("v = ", v);
             telemetry.update();
 
         }
